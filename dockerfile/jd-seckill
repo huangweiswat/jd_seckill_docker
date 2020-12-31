@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eo pipefail
+
+if [ "$1" = "reserve" ]; then
+	echo 1 | python main.py
+fi
+
+if [ "$1" = "seckill" ]; then
+	echo 2 | python main.py
+fi
+
+if [ "$1" = "qrcode" ]; then
+	zbarimg qr_code.png > qrcode.txt && qrencode -r qrcode.txt -o - -t UTF8
+	exit $?
+fi
+
+python main.py
